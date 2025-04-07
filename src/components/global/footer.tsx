@@ -110,7 +110,7 @@ export default function Footer() {
                 <Link
                   key={social.id}
                   to={social.href}
-                  className="rounded-full bg-[#5e3e1b]  transition-colors p-2 text-main"
+                  className="rounded-full border-2 border-transparent bg-main/30 hover:border-main transition-colors p-2 text-main"
                 >
                   {social.icon}
                 </Link>
