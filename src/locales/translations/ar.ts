@@ -43,7 +43,9 @@ export const ar = {
   Veranstaltungen: 'الفعاليات',
   Anfragen: 'الاستفسارات',
   Autoren: 'المؤلفون',
-  Rivale: 'منافس',
+  'Rivale 25%': 'خصم 25%',
+  'Wir vom Sevilla Verlag sind mehr als nur eine Buchhandlung. Wir sind ein Ziel, das die Leidenschaft für das Lesen mit dem Engagement verbindet, ein einzigartiges Einkaufserlebnis zu bieten. Wir bieten eine vielfältige und umfassende Auswahl an Büchern für jeden Geschmack, egal ob Sie ein Fan klassischer Literatur, moderner Romane oder auf der Suche nach seltenen Veröffentlichungen in verschiedenen Sprachen sind. Wir glauben, dass Qualität den entscheidenden Unterschied macht. Deshalb wählen wir jedes Buch sorgfältig aus, um ein unvergessliches Leseerlebnis zu gewährleisten. Darüber hinaus bietet unsere Website eine einfache und bequeme Benutzererfahrung mit sicheren Zahlungsoptionen und einem Kundenservice, der Ihnen jederzeit bei Fragen zur Verfügung steht.':
+    'في اشبيليا نحن أكثر من مجرد متجر لبيع الكتب. نحن وجهة تجمع بين الشغف بالقراءة والالتزام بتقديم تجربة تسوق مميزة. نوفر تشكيلة متنوعة وشاملة من الكتب التي تلبي جميع الأذواق، سواء كنت من عشاق الأدب الكلاسيكي، الروايات الحديثة، أو تبحث عن إصدارات نادرة بلغات مختلفة. نؤمن بأن الجودة تصنع الفارق، ولهذا نحرص على اختيار كل كتاب بعناية فائقة لضمان تقديم تجربة قراءة لا تُنسى. إضافة إلى ذلك، يقدم موقعنا تجربة استخدام سهلة ومريحة، مع خيارات دفع آمنة وخدمة عملاء متاحة دائمًا للإجابة عن أي استفسار.',
   'Auf allen Lehrbüchern': 'على جميع الكتب الدراسية',
   Bestseller: 'الأكثر مبيعًا',
   'Alle ansehen': 'عرض الكل',
@@ -60,4 +62,5 @@ export const ar = {
   'Sprachliche und kulturelle Vielfalt': 'تنوع لغوي وثقافي',
   'Hohe Qualität und Kundenzufriedenheit garantiert':
     'جودة عالية ورضا عملاء مضمون',
+  'Jetzt entdecken': 'اكتشف الآن',
 };

@@ -94,3 +94,15 @@
     @apply bg-background text-foreground font-['cairo'];
   }
 }
+
+@font-face {
+  font-family: 'Cortoba';
+  src: url('assets/fonts/Cortoba.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-cortoba {
+  font-family: 'Cortoba', sans-serif;
+  letter-spacing: -0.05em !important;
+}
