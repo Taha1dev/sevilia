@@ -5,6 +5,8 @@ import Vision from '@/components/home/vision/vision';
 import ImageOverlay from '@/components/chunks/image-overlay';
 import BookListPage from '@/components/home/categories/categories';
 import Books from '@/components/home/books/books';
+import WhyUs from '@/components/home/whyus/whyus';
+import NewsLetter from '@/components/home/newsletter/news-letter';
 
 export default function Home() {
   return (
@@ -20,6 +22,8 @@ export default function Home() {
       <Vision />
       <Books />
       <BookListPage />
+      <WhyUs />
+      <NewsLetter />
       <Partners />
     </div>
   );

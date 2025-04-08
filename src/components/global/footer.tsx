@@ -128,7 +128,7 @@ export default function Footer() {
       <hr className="border-b border-white" />
 
       <div className="relative text-center text-sm text-gray-400 mt-8">
-        <p>CORDOBA. All Rights Reserved - {new Date().getFullYear()}</p>
+        <p>Sevilia. All Rights Reserved - {new Date().getFullYear()}</p>
         <Link to="#" className="text-white hover:text-white transition-colors">
           Powered by ProTech
         </Link>

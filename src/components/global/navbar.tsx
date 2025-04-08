@@ -17,7 +17,7 @@ export default function Navbar() {
   }
   const navLinks: NavLinksProps[] = [
     { id: 1, title: 'Heim', target: '/' },
-    { id: 2, title: 'Kurse', target: 'courses' },
+    { id: 2, title: 'Books', target: '/books' },
     { id: 4, title: 'über uns', target: '/about' },
     { id: 7, title: 'Häufig gestellte Fragen', target: '/faq' },
     { id: 8, title: 'Kontaktiere uns', target: '/contact' },
