@@ -59,7 +59,7 @@ export default function WhyUs() {
           ))}
         </div>
 
-        <div className="absolute inset-0 opacity-10 lg:static lg:opacity-100 flex items-center justify-center order-first md:order-none">
+        <div className="hidden lg:flex items-center justify-center order-first md:order-none">
           <img
             src="/images/whyus.png"
             className="w-full max-w-2xl object-contain"

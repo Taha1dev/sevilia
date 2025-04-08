@@ -37,7 +37,8 @@ export default function NewsLetter() {
               />
               <button
                 type="submit"
-                className="px-6 py-3 bg-orange hover:bg-orange-600 text-white font-medium rounded-lg transition-colors duration-300 whitespace-nowrap"
+                className="px-6 py-3 cursor-pointer
+                bg-orange hover:bg-orange-500 text-white font-medium rounded-lg transition-colors duration-300 whitespace-nowrap"
               >
                 {t(data.input.button)}
               </button>

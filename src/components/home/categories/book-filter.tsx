@@ -19,7 +19,7 @@ export default function BookFilter({
               'whitespace-nowrap cursor-pointer px-4 py-2 rounded-md text-sm font-medium',
               selected === filter
                 ? 'bg-main text-white'
-                : 'bg-muted text-muted-foreground hover:bg-accent'
+                : 'bg-white text-muted-foreground hover:bg-white/80'
             )}
             onClick={() => setSelected(filter)}
           >

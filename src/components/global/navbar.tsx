@@ -16,11 +16,13 @@ export default function Navbar() {
     target: string;
   }
   const navLinks: NavLinksProps[] = [
-    { id: 1, title: 'Heim', target: '/' },
-    { id: 2, title: 'Books', target: '/books' },
-    { id: 4, title: 'über uns', target: '/about' },
-    { id: 7, title: 'Häufig gestellte Fragen', target: '/faq' },
-    { id: 8, title: 'Kontaktiere uns', target: '/contact' },
+    { id: 1, title: 'Seite', target: '/' },
+    { id: 2, title: 'Veranstaltungen', target: '' },
+    { id: 3, title: 'Bücher', target: '/books' },
+    { id: 4, title: 'Anfragen', target: '' },
+    { id: 5, title: 'über uns', target: '/about' },
+    { id: 6, title: 'Häufig gestellte Fragen', target: '/faq' },
+    { id: 7, title: 'Kontaktiere uns', target: '/contact' },
   ];
   const { t } = useTranslation();
   return (

@@ -11,7 +11,7 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <Heading
-      className={`font-cortoba text-center text-variant text-4xl lg:text-6xl my-6 ${className}`}
+      className={`font-cortoba ltr:font-bold  text-center text-variant text-4xl lg:text-6xl my-6 ${className}`}
     >
       {title}
     </Heading>

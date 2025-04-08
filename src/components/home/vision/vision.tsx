@@ -9,18 +9,28 @@ export default function Vision() {
 
   return (
     <div className="bg-main">
-      <section className="container mx-auto font-cairo px-4 sm:px-8 py-12 ">
-        <div className="grid lg:!grid-cols-2 gap-8 lg:!gap-44 items-center">
-          <div className="text-white">
-            <h1 className="font-cortoba text-variant/80 w-fit text-4xl sm:text-5xl lg:!text-6xl mb-6">
+      <section className="container mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-16 lg:py-20 font-cairo">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24 items-center">
+          {/* Text Content */}
+          <div className="text-white space-y-6 md:space-y-8 order-2 lg:order-1">
+            <h1 className="font-cortoba text-4xl sm:text-5xl md:text-6xl ltr:font-bold leading-tight text-white">
               {t(data.title)}
             </h1>
-            <p className="text-xl tracking-wide leading-loose lg:!mb-8 max-w-2xl mx-auto lg:!mx-0 text-justify">
+
+            <p className="text-lg md:text-xl lg:text-xl text-white/90 leading-relaxed max-w-2xl">
               {t(data.desc)}
             </p>
           </div>
-          <div className="bg-background rounded-3xl relative">
-            <img src={image} alt="Happy Kids!" className="w-full h-auto" />
+
+          {/* Image Container */}
+          <div className="order-1 lg:order-2">
+            <div className="bg-background rounded-3xl p-1 sm:p-1.5 md:p-2 shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
+              <img
+                src={image}
+                alt="Happy Kids!"
+                className="w-full h-auto rounded-2xl object-cover transition-transform duration-500 hover:scale-[1.02]"
+              />
+            </div>
           </div>
         </div>
       </section>

@@ -14,11 +14,13 @@ export default function Footer() {
   const { t } = useTranslation();
 
   const navLinks = [
-    { id: 1, name: 'Heim', href: '/' },
-    { id: 2, name: 'Kurse', href: '/courses' },
-    { id: 4, name: 'über uns', href: '/about' },
-    { id: 7, name: 'Häufig gestellte Fragen', href: '/faq' },
-    { id: 8, name: 'Kontaktiere uns', href: '/contact' },
+    { id: 1, title: 'Seite', target: '/' },
+    { id: 2, title: 'Veranstaltungen', target: '' },
+    { id: 3, title: 'Bücher', target: '/books' },
+    { id: 4, title: 'Anfragen', target: '' },
+    { id: 5, title: 'über uns', target: '/about' },
+    { id: 6, title: 'Häufig gestellte Fragen', target: '/faq' },
+    { id: 7, title: 'Kontaktiere uns', target: '/contact' },
   ];
 
   const contactInfo = [
@@ -94,10 +96,10 @@ export default function Footer() {
               {navLinks.map((service) => (
                 <li key={service.id}>
                   <Link
-                    to={service.href || ''}
+                    to={service.target || ''}
                     className="text-white hover:text-main duration-300 transition-colors"
                   >
-                    {t(service.name)}
+                    {t(service.title)}
                   </Link>
                 </li>
               ))}
