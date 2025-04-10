@@ -19,7 +19,7 @@ export default function Navbar() {
     { id: 1, title: 'Seite', target: '/' },
     { id: 2, title: 'Veranstaltungen', target: '' },
     { id: 3, title: 'Bücher', target: '/books' },
-    { id: 4, title: 'Anfragen', target: '' },
+    { id: 4, title: 'Anfragen', target: '/cart' },
     { id: 5, title: 'über uns', target: '/about' },
     { id: 6, title: 'Häufig gestellte Fragen', target: '/faq' },
     { id: 7, title: 'Kontaktiere uns', target: '/contact' },
