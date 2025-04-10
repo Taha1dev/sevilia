@@ -1,84 +1,120 @@
-import { ArrowLeftIcon } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
-import { orderSummary } from '@/screens/cart/dummy';
+
+import { useTranslation } from 'react-i18next';
+import useIsRtl from '@/hooks/useIsRtl';
 
 export const OrderSummaryCard = () => {
+  const { t } = useTranslation();
+  const isRtl = useIsRtl();
+  const cartSummaryConfig = {
+    title: t('Einkaufsübersicht'),
+    summary: {
+      items: [
+        { label: t('Zwischensumme'), value: '€299.99' },
+        { label: t('Versand'), value: '€29.00' },
+        { label: t('Steuer'), value: '€29.00' },
+      ],
+      totalLabel: t('Gesamtsumme'),
+      totalValue: '€357.99',
+    },
+    deliveryDate: {
+      label: t('Voraussichtliches Lieferdatum'),
+      value: '11/09/2025',
+    },
+    paymentTitle: t('Zahlungsmethode wählen'),
+    agreement: {
+      textStart: t('Ich stimme der'),
+      policy: t('Rückerstattungsrichtlinie'),
+      company: t('von Dar Eschbilia'),
+    },
+    buttonText: t('Jetzt kaufen abschließen'),
+  };
+
   return (
-    <Card className="flex flex-col h-[909px] items-center pb-6 bg-gray-00 rounded-[15px] overflow-hidden border border-solid border-[#e4e7e9]">
-      <CardHeader className="w-full px-6 py-5">
-        <CardTitle className="w-[376px] [font-family:'Cairo',Helvetica] font-medium text-gray-900 text-lg tracking-[0] leading-6 [direction:rtl]">
-          إجماليات الشراء
+    <Card className="flex flex-col items-center pb-6 bg-background rounded-xl overflow-hidden border border-border shadow-none">
+      <CardHeader className="w-full p-4 md:p-6">
+        <CardTitle className="font-medium text-lg text-start">
+          {cartSummaryConfig.title}
         </CardTitle>
       </CardHeader>
 
-      <CardContent className="flex flex-col items-start gap-[19px] w-full">
-        <div className="flex flex-col items-start gap-[26px] w-full">
+      <CardContent className="flex flex-col items-start gap-5 w-full px-4 md:px-6">
+        <div className="flex flex-col items-start gap-6 w-full">
           {/* Order Summary Details */}
-          <div className="flex flex-col h-44 items-end gap-4 w-full pb-6">
-            <div className="flex flex-col items-end gap-3 pb-1 w-full">
-              {orderSummary.map((item, index) => (
+          <div className="flex flex-col items-end gap-4 w-full pb-4">
+            <div className="flex flex-col items-end gap-3 w-full">
+              {cartSummaryConfig.summary.items.map((item, index) => (
                 <div
                   key={index}
-                  className="flex w-[376px] items-center justify-between"
+                  className="flex w-full items-center justify-between"
                 >
-                  <div className="w-fit mt-[-1.00px] font-medium text-gray-900 whitespace-nowrap [font-family:'Cairo',Helvetica] text-sm tracking-[0] leading-5 [direction:rtl]">
+                  <div className="font-medium text-sm text-start">
                     {item.value}
                   </div>
-                  <div className="w-fit mt-[-1.00px] [font-family:'Cairo',Helvetica] font-normal text-gray-600 text-sm tracking-[0] leading-5 whitespace-nowrap [direction:rtl]">
+                  <div className="font-normal text-muted-foreground text-sm text-start">
                     {item.label}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="flex w-[376px] items-center justify-between">
-              <div className="w-fit mt-[-1.00px] font-semibold text-gray-900 text-base tracking-[0] leading-6 whitespace-nowrap [font-family:'Cairo',Helvetica] [direction:rtl]">
-                357.99 دولار أمريكي
+            <div className="flex w-full items-center justify-between pt-2">
+              <div className="font-semibold text-base text-start">
+                {cartSummaryConfig.summary.totalValue}
               </div>
-              <div className="w-fit mt-[-1.00px] font-normal text-gray-900 text-base tracking-[0] leading-6 whitespace-nowrap [font-family:'Cairo',Helvetica] [direction:rtl]">
-                الملخص
+              <div className="font-normal text-base text-start">
+                {cartSummaryConfig.summary.totalLabel}
               </div>
             </div>
           </div>
 
-          <Separator className="w-[371.01px]" />
+          <Separator className="w-full" />
 
-          <div className="w-[376px] h-[29px] [font-family:'Cairo',Helvetica] font-medium text-gray-900 text-[15px] tracking-[0] leading-6 [direction:rtl]">
-            تاريخ المتوقع للتسليم
-            <span className="float-left">11/09/2025</span>
+          <div className="w-full font-medium text-sm md:text-base text-start flex justify-between">
+            <span>{cartSummaryConfig.deliveryDate.label}</span>
+            <span>{cartSummaryConfig.deliveryDate.value}</span>
           </div>
 
-          <Separator className="w-[371.01px]" />
+          <Separator className="w-full" />
 
-          <div className="w-[376px] h-[29px] font-medium text-gray-900 text-lg tracking-[0] leading-6 [font-family:'Cairo',Helvetica] [direction:rtl]">
-            اختر طريقة الدفع
+          <div className="w-full font-medium text-lg text-start">
+            {cartSummaryConfig.paymentTitle}
           </div>
         </div>
 
         {/* Terms Agreement */}
-        <div className="flex w-[376px] items-center justify-end gap-3">
-          <div className="w-[339px] font-medium text-black text-sm tracking-[0] leading-[normal] [font-family:'Cairo',Helvetica] [direction:rtl]">
-            <span className="[font-family:'Cairo',Helvetica] font-medium text-black text-sm tracking-[0]">
-              أنا أوافق على{' '}
-            </span>
-            <span className="underline">سياسة الترجيع</span>
-            <span className="[font-family:'Cairo',Helvetica] font-medium text-black text-sm tracking-[0]">
-              {' '}
-              الخاصة بدار اشبيلية{' '}
-            </span>
+        <div className="flex w-full items-center gap-3">
+          <Checkbox className="w-5 h-5 rounded-md border-orange cursor-pointer" />
+          <div className="font-medium text-sm text-start">
+            {cartSummaryConfig.agreement.textStart}{' '}
+            <span className="underline cursor-pointer">
+              {cartSummaryConfig.agreement.policy}
+            </span>{' '}
+            {cartSummaryConfig.agreement.company}
           </div>
-          <Checkbox className="w-[25px] h-[25px] rounded-[7.81px] border-[1.04px] border-solid border-[#ff9e18] shadow-[0px_1.04px_3.12px_#1a1a1a14]" />
         </div>
 
         {/* Checkout Button */}
-        <Button className="w-[376px] justify-center gap-3 px-8 py-0 bg-[#ff9e18] rounded-lg items-center h-14">
-          <ArrowLeftIcon className="w-6 h-6 text-gray-00" />
-          <span className="font-bold text-gray-00 text-base tracking-[0.19px] leading-[56px] whitespace-nowrap [font-family:'Cairo',Helvetica] [direction:rtl]">
-            إتمام عملية الشراء
-          </span>
+        <Button className="w-full cursor-pointer justify-center gap-3 py-4 bg-orange hover:bg-orange/90">
+          {isRtl ? (
+            <>
+              <span className="font-bold text-background text-base">
+                {cartSummaryConfig.buttonText}
+              </span>
+              <ArrowLeftIcon className="w-5 h-5 text-background" />
+            </>
+          ) : (
+            <>
+              <span className="font-bold text-background text-base">
+                {cartSummaryConfig.buttonText}
+              </span>
+              <ArrowRightIcon className="w-5 h-5 text-background" />
+            </>
+          )}
         </Button>
       </CardContent>
     </Card>
