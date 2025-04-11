@@ -1,5 +1,5 @@
-import { OrderSummaryCard } from '@/components/sections/order-summary-car';
-import { ShoppingCartCard } from '@/components/sections/shopping-cart-cards';
+import { OrderSummaryCard } from '@/components/sections/cart/order-summary-car';
+import { ShoppingCartCard } from '@/components/sections/cart/shopping-cart-cards';
 
 export const CartPage = (): JSX.Element => {
   return (
