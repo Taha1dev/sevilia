@@ -8,6 +8,7 @@ import AboutPage from '@/screens/about/page';
 import Contact from '@/screens/contact/page';
 import FAQPage from '@/screens/faq/page';
 import BillingAddressDialog from '@/components/sections/checkout/dialog';
+import OrderDetailsDialog from '@/components/sections/cart/order-details-dialog';
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       { path: 'contact', element: <Contact /> },
       { path: 'faq', element: <FAQPage /> },
       { path: 'test', element: <BillingAddressDialog /> },
+      {
+        path: 'd',
+        element: <OrderDetailsDialog open={true} onClose={() => null} />,
+      },
       { path: 'books/:id', element: <SingleBook /> },
     ],
   },

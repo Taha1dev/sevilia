@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -11,6 +10,15 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { countries } from '@/data/countries'; // Assuming you have a countries list
+import {
+  FormField,
+  FormTextarea,
+} from '@/components/chunks/controls/form-field'; // Assuming you have a FormField component
+import { MessageSquare } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+// import MultiSelect from '@/components/chunks/controls/multi-select';
 import {
   Select,
   SelectContent,
@@ -18,11 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-import { countries } from '@/data/countries'; // Assuming you have a countries list
-import { FormField, FormTextarea } from '@/components/chunks/form-field'; // Assuming you have a FormField component
-import { MessageSquare } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 
 interface BillingAddressFormValues {
@@ -87,7 +91,10 @@ const initialValues: BillingAddressFormValues = {
 
 export default function BillingAddressDialog() {
   const [open, setOpen] = useState(false);
+  // const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
+
   const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -95,6 +102,8 @@ export default function BillingAddressDialog() {
       console.log(values);
       setOpen(false);
     },
+    validateOnBlur: false,
+    validateOnChange: false,
   });
 
   const { values, errors, touched, handleSubmit, setFieldValue, resetForm } =
@@ -112,149 +121,171 @@ export default function BillingAddressDialog() {
     return countries.filter((c) =>
       c.name.toLowerCase().includes(search.toLowerCase())
     );
-  }, [countries, search]);
+  }, [search]);
+
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button variant="outline">{t('Rechnungsadresse bearbeiten')}</Button>
-      </DialogTrigger>
-      <DialogContent className="max-w-2xl">
-        <DialogHeader>
-          <DialogTitle>{t('Rechnungsadresse')}</DialogTitle>
-        </DialogHeader>
+    <div className="relative overflow-visible z-50">
+      <Dialog open={open} onOpenChange={handleOpenChange}>
+        <DialogTrigger asChild>
+          <Button variant="outline">{t('Rechnungsadresse bearbeiten')}</Button>
+        </DialogTrigger>
+        <DialogContent className="max-w-2xl overflow-visible">
+          <DialogHeader>
+            <DialogTitle>{t('Rechnungsadresse')}</DialogTitle>
+          </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                label={t('Vorname')}
+                error={touched.firstName ? errors.firstName : undefined}
+                {...formik.getFieldProps('firstName')}
+              />
+
+              <FormField
+                label={t('Nachname')}
+                error={touched.lastName ? errors.lastName : undefined}
+                {...formik.getFieldProps('lastName')}
+              />
+            </div>
+
             <FormField
-              label={t('Vorname')}
-              error={touched.firstName ? errors.firstName : undefined}
-              {...formik.getFieldProps('firstName')}
+              label={t('Titel der Rechnung')}
+              error={touched.invoiceTitle ? errors.invoiceTitle : undefined}
+              {...formik.getFieldProps('invoiceTitle')}
             />
 
-            <FormField
-              label={t('Nachname')}
-              error={touched.lastName ? errors.lastName : undefined}
-              {...formik.getFieldProps('lastName')}
-            />
-          </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                label={t('Straßenname')}
+                error={touched.street ? errors.street : undefined}
+                {...formik.getFieldProps('street')}
+              />
 
-          <FormField
-            label={t('Titel der Rechnung')}
-            error={touched.invoiceTitle ? errors.invoiceTitle : undefined}
-            {...formik.getFieldProps('invoiceTitle')}
-          />
+              <FormField
+                label={t('Hausnummer')}
+                error={
+                  formik.touched.houseNumber ? errors.houseNumber : undefined
+                }
+                {...formik.getFieldProps('houseNumber')}
+              />
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormField
-              label={t('Straßenname')}
-              error={touched.street ? errors.street : undefined}
-              {...formik.getFieldProps('street')}
-            />
-
-            <FormField
-              label={t('Hausnummer')}
+            <FormTextarea
+              icon={<MessageSquare className="size-5 text-muted-foreground" />}
+              id="content"
+              placeholder={t('Nachricht')}
+              label={t('Adresse (optional)')}
               error={
-                formik.touched.houseNumber ? errors.houseNumber : undefined
+                formik.touched.addressDetails && formik.errors.addressDetails
               }
-              {...formik.getFieldProps('houseNumber')}
-            />
-          </div>
-
-          <FormTextarea
-            icon={<MessageSquare className="size-5 text-muted-foreground" />}
-            id="content"
-            placeholder={t('Nachricht')}
-            label={t('Adresse (optional)')}
-            error={
-              formik.touched.addressDetails && formik.errors.addressDetails
-            }
-            {...formik.getFieldProps('addressDetails')}
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <FormField
-              label={t('PLZ')}
-              error={touched.zip ? errors.zip : undefined}
-              {...formik.getFieldProps('zip')}
+              {...formik.getFieldProps('addressDetails')}
             />
 
-            <FormField
-              label={t('Stadt')}
-              error={touched.city ? errors.city : undefined}
-              {...formik.getFieldProps('city')}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <FormField
+                label={t('PLZ')}
+                error={touched.zip ? errors.zip : undefined}
+                {...formik.getFieldProps('zip')}
+              />
 
-            <div className="w-full space-y-2">
-              <Label
-                htmlFor="country"
-                className="text-sm font-medium text-gray-700"
-              >
-                {t('Land')}
-              </Label>
-              <Select
-                value={values.country}
-                onValueChange={(value) => setFieldValue('country', value)}
-              >
-                <SelectTrigger
-                  className={cn(
-                    'w-full transition-colors duration-200',
-                    touched.country && errors.country
-                      ? 'border-red-500 focus:ring-red-500'
-                      : 'focus:ring-main'
+              <FormField
+                label={t('Stadt')}
+                error={touched.city ? errors.city : undefined}
+                {...formik.getFieldProps('city')}
+              />
+
+              <div className="w-full space-y-2">
+                {/* <MultiSelect
+                  options={countries.map((c) => ({
+                    name: c.name,
+                    code: c.code,
+                  }))}
+                  selected={selectedCountries}
+                  onChange={setSelectedCountries}
+                  placeholder={t('Land wählen')}
+                /> */}
+                <div className="w-full space-y-2">
+                  <Label
+                    htmlFor="country"
+                    className="text-sm font-medium text-gray-700"
+                  >
+                    {t('Land')}
+                  </Label>
+                  <Select
+                    onValueChange={(value) => setFieldValue('country', value)}
+                  >
+                    <SelectTrigger
+                      className={cn(
+                        'w-full transition-colors duration-200',
+                        touched.country && errors.country
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'focus:ring-main'
+                      )}
+                    >
+                      <SelectValue placeholder={t('Land wählen')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <div className="px-3 py-2">
+                        <Input
+                          placeholder={t('Suchen...')}
+                          value={search}
+                          onChange={(e) => setSearch(e.target.value)}
+                          className="h-8"
+                        />
+                      </div>
+                      {filteredCountries.length > 0 ? (
+                        filteredCountries.map((country) => (
+                          <SelectItem key={country.code} value={country.name}>
+                            {country.name}
+                          </SelectItem>
+                        ))
+                      ) : (
+                        <div className="px-3 py-2 text-sm text-muted-foreground">
+                          {t('Keine Ergebnisse')}
+                        </div>
+                      )}
+                    </SelectContent>
+                  </Select>
+                  {touched.country && errors.country && (
+                    <p className="text-red-600 text-xs mt-1 font-medium">
+                      {t(errors.country)}
+                    </p>
                   )}
-                >
-                  <SelectValue placeholder={t('Land wählen')} />
-                </SelectTrigger>
-                <SelectContent>
-                  <div className="px-3 py-2">
-                    <Input
-                      placeholder={t('Suchen...')}
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      className="h-8"
-                    />
-                  </div>
-                  {filteredCountries.length > 0 ? (
-                    filteredCountries.map((country) => (
-                      <SelectItem key={country.code} value={country.name}>
-                        {country.name}
-                      </SelectItem>
-                    ))
-                  ) : (
-                    <div className="px-3 py-2 text-sm text-muted-foreground">
-                      {t('Keine Ergebnisse')}
-                    </div>
-                  )}
-                </SelectContent>
-              </Select>
+                </div>
+              </div>
+
               {touched.country && errors.country && (
                 <p className="text-red-600 text-xs mt-1 font-medium">
                   {t(errors.country)}
                 </p>
               )}
             </div>
-          </div>
 
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="sameAsShipping"
-              checked={values.isSameAsShipping}
-              onCheckedChange={(checked) =>
-                setFieldValue('isSameAsShipping', checked === true)
-              }
-            />
-            <label htmlFor="sameAsShipping" className="text-sm">
-              {t('Rechnungsadresse entspricht der Lieferadresse')}
-            </label>
-          </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="sameAsShipping"
+                checked={values.isSameAsShipping}
+                onCheckedChange={(checked) =>
+                  setFieldValue('isSameAsShipping', checked === true)
+                }
+              />
+              <label htmlFor="sameAsShipping" className="text-sm">
+                {t('Rechnungsadresse entspricht der Lieferadresse')}
+              </label>
+            </div>
 
-          <div className="pt-4 flex ">
-            <Button type="submit" className="w-full bg-orange hover:bg-orange">
-              {t('Speichern')}
-            </Button>
-          </div>
-        </form>
-      </DialogContent>
-    </Dialog>
+            <div className="pt-4 flex ">
+              <Button
+                type="submit"
+                className="w-full bg-orange hover:bg-orange"
+              >
+                {t('Speichern')}
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 }
